@@ -1,5 +1,5 @@
 import 'package:chat/controllers/theme_provider.dart';
-import 'package:chat/core/utils/assets.dart';
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/views/screens/recent_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +16,9 @@ class MainLayout extends HookWidget {
     final currentIndex = useState<int>(0);
 
     final screens = [
-      (icon: const Icon(Icons.schedule), label: "Recent", screen: const RecentScreen()),
-      (icon: const Icon(Icons.people), label: "Contacts", screen: const Text("Contacts Screen")),
-      (icon: const Icon(Icons.person), label: "Profile", screen: const Text("Profile Screen")),
+      (icon: const Icon(Icons.schedule), label: Constants.recent, screen: const RecentScreen()),
+      (icon: const Icon(Icons.people), label: Constants.contacts, screen: const Text("Contacts Screen")),
+      (icon: const Icon(Icons.person), label: Constants.profile, screen: const Text("Profile Screen")),
     ];
 
     return Scaffold(
