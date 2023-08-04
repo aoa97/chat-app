@@ -1,15 +1,18 @@
+import 'package:chat/controllers/theme_provider.dart';
 import 'package:chat/utils/assets.dart';
 import 'package:chat/utils/extensions.dart';
 import 'package:chat/views/screens/recent_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends HookWidget {
   const MainLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appTheme = context.read<ThemeProvider>();
     final currentIndex = useState<int>(0);
 
     final screens = [
@@ -26,8 +29,8 @@ class MainLayout extends HookWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.dark_mode),
+            onPressed: appTheme.switchTheme,
+            icon: Icon(appTheme.isDark ? Icons.light_mode : Icons.dark_mode),
           ),
         ],
       ),
