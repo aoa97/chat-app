@@ -1,5 +1,7 @@
+import 'package:chat/utils/extensions.dart';
 import 'package:chat/views/widgets/main_wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class RecentItem extends StatelessWidget {
   final String image;
@@ -22,21 +24,24 @@ class RecentItem extends StatelessWidget {
       child: MainWrapper(
         child: ListTile(
           leading: CircleAvatar(
-            radius: 21,
-            backgroundColor: Colors.black,
+            radius: 20.h,
+            backgroundColor: context.colors.inversePrimary,
             child: CircleAvatar(
-              radius: 20,
+              radius: 19.h,
               backgroundImage: NetworkImage(image),
             ),
           ),
-          title: Text(user, style: const TextStyle(fontSize: 14)),
+          title: Text(
+            user,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500, color: context.colors.inversePrimary),
+          ),
           subtitle: Text(
             message,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: TextStyle(fontSize: 11.sp, color: context.colors.secondary),
           ),
-          trailing: Text(createdAt),
+          trailing: Text(createdAt, style: TextStyle(color: context.colors.inversePrimary)),
         ),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:chat/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 class MainWrapper extends StatelessWidget {
@@ -10,12 +11,12 @@ class MainWrapper extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: context.colors.primary,
         shape: BeveledRectangleBorder(
           borderRadius: BorderRadius.circular(5),
-          side: const BorderSide(color: Colors.black),
+          side: BorderSide(color: context.colors.inversePrimary),
         ),
-        shadows: const [BoxShadow(offset: Offset(6, 5))],
+        shadows: [BoxShadow(offset: const Offset(6, 5), color: context.colors.inversePrimary)],
       ),
       child: child,
     );

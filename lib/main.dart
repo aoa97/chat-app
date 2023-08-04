@@ -1,5 +1,5 @@
 import 'package:chat/utils/assets.dart';
-import 'package:chat/views/widgets/main_layout.dart';
+import 'package:chat/views/layouts/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,10 +19,10 @@ class MainApp extends StatelessWidget {
           data: MediaQuery.of(context).copyWith(textScaleFactor: 1.sp),
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'First Method',
+            title: 'Chat',
+            themeMode: ThemeMode.dark,
             theme: ThemeData(
               useMaterial3: true,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               fontFamily: Fonts.roboto,
               colorScheme: ColorScheme.fromSeed(
                 seedColor: Colors.blue,
@@ -30,6 +30,8 @@ class MainApp extends StatelessWidget {
                 inversePrimary: Colors.black,
                 secondary: Colors.grey,
                 background: Colors.grey[200],
+                surface: Colors.grey[200],
+                onSurface: Colors.black,
               ),
               inputDecorationTheme: InputDecorationTheme(
                 filled: true,
@@ -37,6 +39,17 @@ class MainApp extends StatelessWidget {
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
                 hintStyle: TextStyle(color: Colors.grey[400], fontSize: 12.sp, fontWeight: FontWeight.w400),
+              ),
+            ),
+            darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+              useMaterial3: true,
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.blue,
+                primary: const Color.fromARGB(255, 27, 27, 27),
+                inversePrimary: Colors.white,
+                secondary: Colors.grey,
+                surface: const Color.fromARGB(255, 27, 27, 27),
+                onSurface: Colors.white,
               ),
             ),
             home: child,
