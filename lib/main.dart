@@ -1,6 +1,6 @@
 import 'package:chat/controllers/theme_provider.dart';
 import 'package:chat/core/services/prefs_service.dart';
-import 'package:chat/core/utils/assets.dart';
+import 'package:chat/core/theme/theme_config.dart';
 import 'package:chat/views/layouts/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,43 +28,8 @@ class MainApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Chat',
               themeMode: context.select((ThemeProvider theme) => theme.currentTheme),
-              theme: ThemeData(
-                useMaterial3: true,
-                fontFamily: Fonts.roboto,
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.blue,
-                  primary: Colors.white,
-                  inversePrimary: Colors.black,
-                  secondary: Colors.grey,
-                  background: Colors.grey[200],
-                  surface: Colors.grey[200],
-                  onSurface: Colors.black,
-                ),
-                inputDecorationTheme: InputDecorationTheme(
-                  filled: true,
-                  fillColor: Theme.of(context).colorScheme.onBackground,
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
-                  hintStyle: TextStyle(color: Colors.grey[400], fontSize: 12.sp, fontWeight: FontWeight.w400),
-                ),
-              ),
-              darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.yellow,
-                  primary: const Color.fromARGB(255, 27, 27, 27),
-                  inversePrimary: Colors.white,
-                  secondary: Colors.grey,
-                  surface: const Color.fromARGB(255, 27, 27, 27),
-                  onSurface: Colors.white,
-                ),
-                inputDecorationTheme: InputDecorationTheme(
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 27, 27, 27),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
-                  hintStyle: TextStyle(color: Colors.grey[400], fontSize: 12.sp, fontWeight: FontWeight.w400),
-                ),
-              ),
+              theme: ThemeConfig.light,
+              darkTheme: ThemeConfig.dark,
               home: child,
             ),
           );
