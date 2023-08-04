@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Chat',
-            themeMode: ThemeMode.dark,
+            themeMode: ThemeMode.light,
             theme: ThemeData(
               useMaterial3: true,
               fontFamily: Fonts.roboto,
@@ -42,14 +42,20 @@ class MainApp extends StatelessWidget {
               ),
             ),
             darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
-              useMaterial3: true,
               colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.blue,
+                seedColor: Colors.yellow,
                 primary: const Color.fromARGB(255, 27, 27, 27),
                 inversePrimary: Colors.white,
                 secondary: Colors.grey,
                 surface: const Color.fromARGB(255, 27, 27, 27),
                 onSurface: Colors.white,
+              ),
+              inputDecorationTheme: InputDecorationTheme(
+                filled: true,
+                fillColor: const Color.fromARGB(255, 27, 27, 27),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
+                hintStyle: TextStyle(color: Colors.grey[400], fontSize: 12.sp, fontWeight: FontWeight.w400),
               ),
             ),
             home: child,
