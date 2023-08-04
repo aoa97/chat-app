@@ -1,11 +1,14 @@
 import 'package:chat/controllers/theme_provider.dart';
-import 'package:chat/utils/assets.dart';
+import 'package:chat/core/services/prefs_service.dart';
+import 'package:chat/core/utils/assets.dart';
 import 'package:chat/views/layouts/main_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefsService.init();
   runApp(const MainApp());
 }
 
@@ -15,7 +18,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
+      create: (_) => ThemeProvider(prefs: PrefsService()),
       child: ScreenUtilInit(
         minTextAdapt: true,
         builder: (context, child) {

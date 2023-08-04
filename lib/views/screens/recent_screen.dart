@@ -1,4 +1,4 @@
-import 'package:chat/utils/extensions.dart';
+import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/views/containers/main_wrapper.dart';
 import 'package:chat/views/containers/recent_list.dart';
 import 'package:flutter/material.dart';

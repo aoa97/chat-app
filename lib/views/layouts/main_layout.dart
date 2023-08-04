@@ -1,6 +1,6 @@
 import 'package:chat/controllers/theme_provider.dart';
-import 'package:chat/utils/assets.dart';
-import 'package:chat/utils/extensions.dart';
+import 'package:chat/core/utils/assets.dart';
+import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/views/screens/recent_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';

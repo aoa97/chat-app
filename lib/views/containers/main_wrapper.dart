@@ -1,4 +1,4 @@
-import 'package:chat/utils/extensions.dart';
+import 'package:chat/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 
 class MainWrapper extends StatelessWidget {
