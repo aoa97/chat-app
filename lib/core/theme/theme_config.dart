@@ -12,7 +12,7 @@ class ThemeConfig {
         primary: Colors.white,
         inversePrimary: Colors.black,
         secondary: Colors.grey,
-        background: Colors.grey[200],
+        background: const Color(0xFFeeeeee),
         surface: Colors.grey[200],
         onSurface: Colors.black,
       ),
