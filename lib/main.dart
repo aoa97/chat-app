@@ -1,12 +1,15 @@
 import 'package:chat/core/services/prefs_service.dart';
 import 'package:chat/core/theme/theme_config.dart';
+import 'package:chat/firebase_options.dart';
 import 'package:chat/views/layouts/main_layout.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefsService.init();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MainApp());
 }
 
