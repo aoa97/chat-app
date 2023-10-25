@@ -8,7 +8,6 @@ abstract class Constants {
   static const register = "Register";
 }
 
-abstract class Fonts {
-  static const roboto = "Roboto";
-  static const bungee = "Bungee";
+abstract class FirebaseConstants {
+  static const usersCollection = "users";
 }

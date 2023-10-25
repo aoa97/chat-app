@@ -1,6 +1,11 @@
 import 'package:chat/core/services/prefs_service.dart';
 import 'package:chat/core/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+final themeProvider = ChangeNotifierProvider<ThemeProvider>(
+  (ref) => ThemeProvider(prefs: ref.read(prefsProvider)),
+);
 
 class ThemeProvider with ChangeNotifier {
   final PrefsService _prefs;

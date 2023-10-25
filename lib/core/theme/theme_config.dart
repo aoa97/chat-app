@@ -1,4 +1,4 @@
-import 'package:chat/core/utils/constants.dart';
+import 'package:chat/core/utils/flutter_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -38,7 +38,7 @@ class ThemeConfig {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color.fromARGB(255, 27, 27, 27),
+        fillColor: const Color.fromARGB(255, 37, 36, 36),
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10),
         hintStyle: TextStyle(color: Colors.grey[400], fontSize: 12.sp, fontWeight: FontWeight.w400),

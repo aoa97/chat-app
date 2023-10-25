@@ -20,7 +20,7 @@ class ContactItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => const ChatScreen()));
+        context.push(const ChatScreen());
       },
       child: MainCard(
         child: ListTile(
