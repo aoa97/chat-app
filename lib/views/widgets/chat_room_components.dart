@@ -8,12 +8,12 @@ class _ChatRoomBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: message.isMe ? AlignmentDirectional.centerEnd : AlignmentDirectional.centerStart,
+      alignment: message.isMe! ? AlignmentDirectional.centerEnd : AlignmentDirectional.centerStart,
       child: Row(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!message.isMe) ...[
+          if (!message.isMe!) ...[
             Container(
               width: 30.h,
               height: 30.h,
@@ -24,14 +24,14 @@ class _ChatRoomBubble extends StatelessWidget {
             10.horizontalSpace,
           ],
           Column(
-            crossAxisAlignment: message.isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            crossAxisAlignment: message.isMe! ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Container(
                 padding: const EdgeInsets.all(14).h,
                 decoration: BoxDecoration(
-                  color: message.isMe ? const Color(0xFFe3e3e3) : context.colors.inversePrimary,
+                  color: message.isMe! ? const Color(0xFFe3e3e3) : context.colors.inversePrimary,
                   borderRadius: BorderRadius.only(
-                    topLeft: !message.isMe ? Radius.zero : const Radius.circular(8),
+                    topLeft: !message.isMe! ? Radius.zero : const Radius.circular(8),
                     topRight: const Radius.circular(8),
                     bottomLeft: const Radius.circular(8),
                     bottomRight: const Radius.circular(8),

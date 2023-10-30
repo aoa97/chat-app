@@ -18,6 +18,7 @@ abstract class Constants {
   static const logOut = "Log Out";
   static const searchByNameHint = "Search by name";
   static const emptyContacts = "No contacts";
+  static const emptyMessages = "Send your first messages";
   static const savedMessages = "Saved Messages";
   static const alreadyAccountHint = "Already have an account? Login";
   static const noAccountHint = "Don't have account? Register";
@@ -27,4 +28,5 @@ abstract class Constants {
 
 abstract class FirebaseConstants {
   static const usersCollection = "users";
+  static const chatsCollection = "chats";
 }

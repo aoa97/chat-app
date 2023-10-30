@@ -1,28 +1,30 @@
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/helpers.dart';
 import 'package:chat/views/containers/main_card.dart';
-import 'package:chat/views/screens/chat_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ContactItem extends StatelessWidget {
+class ContactItem extends ConsumerWidget {
+  final String id;
   final String image;
   final String name;
   final String? bio;
+  final VoidCallback onTap;
 
   const ContactItem({
     super.key,
+    required this.id,
     required this.image,
     required this.name,
     required this.bio,
+    required this.onTap,
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
-      onTap: () {
-        context.push(const ChatScreen());
-      },
+      onTap: onTap,
       child: MainCard(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5).h,

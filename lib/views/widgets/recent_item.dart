@@ -1,6 +1,5 @@
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/views/containers/main_card.dart';
-import 'package:chat/views/screens/chat_room_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,7 +21,7 @@ class RecentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        context.push(const ChatScreen());
+        // context.push(const ChatScreen());
       },
       child: MainCard(
         child: ListTile(

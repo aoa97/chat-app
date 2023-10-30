@@ -1,17 +1,24 @@
+import 'package:chat/controllers/chat_room_controller.dart';
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/models/chat_message_model.dart';
 import 'package:chat/views/containers/main_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 part "../widgets/chat_room_components.dart";
 
-class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends ConsumerWidget {
+  final String roomId;
+
+  const ChatScreen({super.key, required this.roomId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final messages = ref.watch(roomMessagesStreamProvider(roomId));
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: AppBar(
@@ -41,15 +48,25 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: GroupedListView(
-                elements: dummyMessages,
-                padding: const EdgeInsets.all(12).h,
-                groupBy: (message) => message.dateTime.day,
-                itemBuilder: (context, message) => _ChatRoomBubble(message: message),
-                groupHeaderBuilder: (message) => _ChatRoomSeparator(
-                  label: message.dateTime.toString().split(" ")[0],
-                ),
-                separator: 7.verticalSpace,
+              child: messages.when(
+                error: (error, stackTrace) => Center(child: Text(error.toString())),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                data: (data) {
+                  if (data.isEmpty) {
+                    return const Center(child: Text(Constants.emptyMessages));
+                  }
+
+                  return GroupedListView(
+                    elements: data,
+                    padding: const EdgeInsets.all(12).h,
+                    groupBy: (message) => message.createdAt.day,
+                    itemBuilder: (context, message) => _ChatRoomBubble(message: message),
+                    groupHeaderBuilder: (message) => _ChatRoomSeparator(
+                      label: message.createdAt.toString().split(" ")[0],
+                    ),
+                    separator: 7.verticalSpace,
+                  );
+                },
               ),
             ),
             const _ChatRoomInput(),

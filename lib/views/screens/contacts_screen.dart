@@ -1,5 +1,6 @@
 import 'package:chat/controllers/contacts_controller.dart';
 import 'package:chat/core/utils/constants.dart';
+import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/views/containers/main_card.dart';
 import 'package:chat/views/widgets/contact_item.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +40,11 @@ class ContactsScreen extends ConsumerWidget {
                   final contact = data[index];
 
                   return ContactItem(
+                    id: contact.uid,
                     image: contact.avatar ?? "",
                     name: contact.name,
                     bio: contact.bio,
+                    onTap: () => context.pushNamed("/user-room", args: contact.uid),
                   );
                 },
                 separatorBuilder: (c, i) => 15.verticalSpace,

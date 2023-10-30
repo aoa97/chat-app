@@ -1,11 +1,13 @@
 import 'package:chat/controllers/auth_controller.dart';
 import 'package:chat/core/services/prefs_service.dart';
 import 'package:chat/core/theme/theme_config.dart';
+import 'package:chat/core/utils/helpers.dart';
 import 'package:chat/firebase_options.dart';
 import 'package:chat/models/user_model.dart';
 import 'package:chat/providers/theme_provider.dart';
 import 'package:chat/views/layouts/main_layout.dart';
 import 'package:chat/views/screens/auth_screen.dart';
+import 'package:chat/views/screens/chat_room_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -55,6 +57,16 @@ class MainApp extends HookConsumerWidget {
                   error: (error, stackTrace) => Center(child: Text(error.toString())),
                   loading: () => const Center(child: CircularProgressIndicator()),
                 ),
+            onGenerateRoute: (settings) {
+              return switch (settings.name) {
+                "/user-room" => () {
+                    final otherId = settings.arguments as String;
+                    final myId = ref.read(userProvider)!.uid;
+                    return MaterialPageRoute(builder: (_) => ChatScreen(roomId: generateRoomId(myId, otherId)));
+                  }(),
+                _ => null,
+              };
+            },
           ),
         );
       },
