@@ -1,13 +1,17 @@
+import 'package:chat/controllers/contacts_controller.dart';
 import 'package:chat/views/containers/main_card.dart';
 import 'package:chat/views/widgets/contact_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ContactsScreen extends StatelessWidget {
+class ContactsScreen extends ConsumerWidget {
   const ContactsScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final contacts = ref.watch(contactsStreamProvider);
+
     return Column(
       children: [
         MainCard(
@@ -20,15 +24,29 @@ class ContactsScreen extends StatelessWidget {
         ),
         30.verticalSpace,
         Expanded(
-          child: ListView.separated(
-            itemCount: 10,
-            itemBuilder: (c, i) => const ContactItem(
-              image: "https://picsum.photos/50",
-              name: "Ahmed Usama",
-              bio: "This is a contact bio",
-            ),
-            separatorBuilder: (c, i) => 15.verticalSpace,
-            padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 10.h),
+          child: contacts.when(
+            error: (error, stackTrace) => Center(child: Text(error.toString())),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            data: (data) {
+              if (data.isEmpty) {
+                return const Center(child: Text("No contacts"));
+              }
+
+              return ListView.separated(
+                itemCount: data.length,
+                itemBuilder: (context, index) {
+                  final contact = data[index];
+
+                  return ContactItem(
+                    image: contact.avatar ?? "",
+                    name: contact.name,
+                    bio: contact.bio,
+                  );
+                },
+                separatorBuilder: (c, i) => 15.verticalSpace,
+                padding: EdgeInsets.fromLTRB(5.w, 0, 5.w, 10.h),
+              );
+            },
           ),
         ),
       ],
