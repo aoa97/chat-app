@@ -13,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:separated_column/separated_column.dart';
 
 class EditProfileScreen extends HookConsumerWidget {
@@ -68,7 +67,7 @@ class EditProfileScreen extends HookConsumerWidget {
                     ),
                     IconButton.filled(
                       onPressed: () async {
-                        avatar.value = await pickImage(source: ImageSource.gallery);
+                        avatar.value = await showMainImageSelector(context);
                       },
                       icon: Icon(Icons.camera_alt, color: context.colors.inversePrimary),
                     ),

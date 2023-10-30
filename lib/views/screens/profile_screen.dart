@@ -46,7 +46,7 @@ class ProfileScreen extends ConsumerWidget {
                           style: TextStyle(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: context.colors.inversePrimary,
+                            color: context.colors.primary,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -69,8 +69,8 @@ class ProfileScreen extends ConsumerWidget {
                         7.5.verticalSpace,
                         MainButton(
                           type: MainButtonType.outlined,
-                          icon: Icon(Icons.edit, color: context.colors.inversePrimary, size: 15.h),
-                          child: Text("Edit", style: TextStyle(color: context.colors.inversePrimary)),
+                          icon: Icon(Icons.edit, color: context.colors.primary, size: 15.h),
+                          child: Text("Edit", style: TextStyle(color: context.colors.primary)),
                           onPressed: () => context.push(const EditProfileScreen()),
                         ),
                       ],
@@ -83,8 +83,8 @@ class ProfileScreen extends ConsumerWidget {
             expanded: true,
             type: MainButtonType.outlined,
             onPressed: () {},
-            icon: Icon(Icons.bookmark, color: context.colors.inversePrimary),
-            child: Text("Saved Messages", style: TextStyle(color: context.colors.inversePrimary)),
+            icon: Icon(Icons.bookmark, color: context.colors.primary),
+            child: Text("Saved Messages", style: TextStyle(color: context.colors.primary)),
           ),
           MainButton(
             expanded: true,
