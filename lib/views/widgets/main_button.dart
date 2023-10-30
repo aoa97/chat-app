@@ -33,7 +33,7 @@ class MainButton extends StatelessWidget {
           if (type == MainButtonType.text) {
             return TextButton(
               onPressed: onPressed,
-              style: TextButton.styleFrom(foregroundColor: context.colors.inversePrimary),
+              style: TextButton.styleFrom(foregroundColor: context.colors.primary),
               child: Text(label!),
             );
           }
@@ -44,12 +44,12 @@ class MainButton extends StatelessWidget {
                 onPressed: onPressed,
                 icon: icon!,
                 label: child!,
-                style: OutlinedButton.styleFrom(backgroundColor: context.colors.primary),
+                style: OutlinedButton.styleFrom(backgroundColor: context.colors.inversePrimary),
               );
             }
             return OutlinedButton(
               onPressed: onPressed,
-              style: OutlinedButton.styleFrom(backgroundColor: context.colors.primary),
+              style: OutlinedButton.styleFrom(backgroundColor: context.colors.inversePrimary),
               child: child ?? Text(label!),
             );
           }
@@ -64,9 +64,16 @@ class MainButton extends StatelessWidget {
             child: () {
               if (child != null) return child;
               if (loading!) {
-                return SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 1.7.w));
+                return SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1.7.w,
+                    color: context.colors.inversePrimary,
+                  ),
+                );
               }
-              return Text(label!, style: TextStyle(color: context.colors.primary));
+              return Text(label!, style: TextStyle(color: context.colors.inversePrimary));
             }(),
           );
         },

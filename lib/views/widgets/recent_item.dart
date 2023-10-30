@@ -39,7 +39,7 @@ class RecentItem extends StatelessWidget {
             style: TextStyle(
               fontSize: 14.sp,
               fontWeight: FontWeight.w500,
-              color: context.colors.inversePrimary,
+              color: context.colors.primary,
             ),
           ),
           subtitle: Text(

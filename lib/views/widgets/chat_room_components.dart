@@ -29,7 +29,7 @@ class _ChatRoomBubble extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(14).h,
                 decoration: BoxDecoration(
-                  color: message.isMe ? const Color(0xFFe3e3e3) : context.colors.primary,
+                  color: message.isMe ? const Color(0xFFe3e3e3) : context.colors.inversePrimary,
                   borderRadius: BorderRadius.only(
                     topLeft: !message.isMe ? Radius.zero : const Radius.circular(8),
                     topRight: const Radius.circular(8),

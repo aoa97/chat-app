@@ -33,7 +33,7 @@ class MainTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final input = TextFormField(
       controller: controller,
-      cursorColor: context.colors.inversePrimary,
+      cursorColor: context.colors.primary,
       decoration: inputDecoration ??
           InputDecoration(
             hintText: hintText,

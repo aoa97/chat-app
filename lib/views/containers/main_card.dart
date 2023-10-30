@@ -12,15 +12,15 @@ class MainCard extends StatelessWidget {
     return Container(
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
-        color: context.colors.primary,
+        color: context.colors.inversePrimary,
         shape: BeveledRectangleBorder(
           borderRadius: thin! ? BorderRadius.zero : BorderRadius.circular(5),
-          side: BorderSide(color: context.colors.inversePrimary),
+          side: BorderSide(color: context.colors.primary),
         ),
         shadows: [
           BoxShadow(
             offset: thin! ? const Offset(3, 2) : const Offset(6, 5),
-            color: context.colors.inversePrimary,
+            color: context.colors.primary,
           ),
         ],
       ),

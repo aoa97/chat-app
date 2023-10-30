@@ -1,7 +1,7 @@
-import 'package:chat/providers/theme_provider.dart';
 import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/flutter_assets.dart';
+import 'package:chat/providers/theme_provider.dart';
 import 'package:chat/views/screens/contacts_screen.dart';
 import 'package:chat/views/screens/profile_screen.dart';
 import 'package:chat/views/screens/recent_screen.dart';
@@ -39,7 +39,7 @@ class MainLayout extends HookConsumerWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex.value,
         onTap: (i) => currentIndex.value = i,
-        selectedItemColor: context.colors.inversePrimary,
+        selectedItemColor: context.colors.primary,
         unselectedItemColor: context.colors.secondary,
         elevation: 0,
         items: [...screens.map((e) => BottomNavigationBarItem(label: e.label, icon: e.icon))],

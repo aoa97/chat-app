@@ -33,7 +33,7 @@ class AuthRepository {
         uid: _authUser!.uid,
         email: _authUser!.email ?? "",
         name: name,
-        avatar: null,
+        avatar: Constants.avatarPlaceholderUrl,
         bio: null,
       );
 
@@ -55,7 +55,7 @@ class AuthRepository {
 
       return right(userModel);
     } on FirebaseException catch (e) {
-      throw e.message!;
+      return left(Failure(e.message ?? ""));
     } catch (e) {
       return left(Failure(e.toString()));
     }
