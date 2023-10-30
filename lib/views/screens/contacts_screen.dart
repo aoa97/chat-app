@@ -1,4 +1,5 @@
 import 'package:chat/controllers/contacts_controller.dart';
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/views/containers/main_card.dart';
 import 'package:chat/views/widgets/contact_item.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class ContactsScreen extends ConsumerWidget {
         MainCard(
           child: TextField(
             decoration: InputDecoration(
-              hintText: "Search by name",
+              hintText: Constants.searchByNameHint,
               prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: () {}),
             ),
           ),
@@ -29,7 +30,7 @@ class ContactsScreen extends ConsumerWidget {
             loading: () => const Center(child: CircularProgressIndicator()),
             data: (data) {
               if (data.isEmpty) {
-                return const Center(child: Text("No contacts"));
+                return const Center(child: Text(Constants.emptyContacts));
               }
 
               return ListView.separated(

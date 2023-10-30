@@ -47,20 +47,20 @@ class AuthScreen extends HookConsumerWidget {
               if (!isLogin)
                 MainTextField(
                   controller: name,
-                  hintText: "Full Name",
+                  hintText: Constants.fullName,
                   prefixIcon: const Icon(Icons.person),
                   validator: FieldValidators.validateName(),
                 ),
               MainTextField(
                 controller: email,
-                hintText: "E-mail",
+                hintText: Constants.email,
                 prefixIcon: const Icon(Icons.email),
                 validator: FieldValidators.validateEmail(),
               ),
               MainTextField(
                 controller: password,
                 obscureText: true,
-                hintText: "Password",
+                hintText: Constants.password,
                 prefixIcon: const Icon(Icons.password_outlined),
                 textInputAction: TextInputAction.go,
                 validator: FieldValidators.validatePassword(),
@@ -73,7 +73,7 @@ class AuthScreen extends HookConsumerWidget {
               MainButton(
                 type: MainButtonType.text,
                 onPressed: () => ref.read(isLoginModeProvider.notifier).update((state) => !state),
-                label: isLogin ? "Don't have account? Register" : "Already have an account? Login",
+                label: isLogin ? Constants.noAccountHint : Constants.alreadyAccountHint,
               )
             ],
           ),

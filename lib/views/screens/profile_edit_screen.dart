@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:chat/controllers/auth_controller.dart';
 import 'package:chat/controllers/user_profile_controller.dart';
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/flutter_assets.dart';
 import 'package:chat/core/utils/flutter_utils.dart';
@@ -41,7 +42,7 @@ class EditProfileScreen extends HookConsumerWidget {
     }
 
     return MainScaffold(
-      title: "Edit Profile",
+      title: Constants.editProfile,
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -77,26 +78,26 @@ class EditProfileScreen extends HookConsumerWidget {
               MainTextField(
                 showCard: false,
                 controller: name,
-                hintText: "Name",
+                hintText: Constants.fullName,
                 validator: FieldValidators.validateName(),
               ),
               MainTextField(
                 showCard: false,
                 controller: email,
-                hintText: "E-mail",
+                hintText: Constants.email,
                 validator: FieldValidators.validateEmail(),
               ),
               MainTextField(
                 showCard: false,
                 maxLines: 5,
                 controller: bio,
-                hintText: "Bio",
+                hintText: Constants.bio,
                 validator: FieldValidators.validateBio(),
               ),
               MainButton(
                 onPressed: handleSubmit,
                 loading: isLoading,
-                label: "Submit",
+                label: Constants.submit,
               )
             ],
           ),

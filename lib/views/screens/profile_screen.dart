@@ -1,4 +1,5 @@
 import 'package:chat/controllers/auth_controller.dart';
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/flutter_assets.dart';
 import 'package:chat/views/containers/main_card.dart';
@@ -70,7 +71,7 @@ class ProfileScreen extends ConsumerWidget {
                         MainButton(
                           type: MainButtonType.outlined,
                           icon: Icon(Icons.edit, color: context.colors.primary, size: 15.h),
-                          child: Text("Edit", style: TextStyle(color: context.colors.primary)),
+                          child: Text(Constants.edit, style: TextStyle(color: context.colors.primary)),
                           onPressed: () => context.push(const EditProfileScreen()),
                         ),
                       ],
@@ -84,14 +85,14 @@ class ProfileScreen extends ConsumerWidget {
             type: MainButtonType.outlined,
             onPressed: () {},
             icon: Icon(Icons.bookmark, color: context.colors.primary),
-            child: Text("Saved Messages", style: TextStyle(color: context.colors.primary)),
+            child: Text(Constants.savedMessages, style: TextStyle(color: context.colors.primary)),
           ),
           MainButton(
             expanded: true,
             type: MainButtonType.outlined,
             onPressed: ref.read(authControllerProvider.notifier).logOut,
             icon: const Icon(Icons.logout, color: Colors.red),
-            child: const Text("Log out", style: TextStyle(color: Colors.red)),
+            child: const Text(Constants.logOut, style: TextStyle(color: Colors.red)),
           ),
         ],
       ),

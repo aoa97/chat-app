@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -34,7 +35,7 @@ Future<File?> showMainImageSelector(BuildContext context) async {
       children: [
         ListTile(
           leading: const Icon(Icons.image),
-          title: const Text("Gallery"),
+          title: const Text(Constants.gallery),
           onTap: () {
             pickImage(source: ImageSource.gallery).then((result) {
               pickedImage = File(result.path);
@@ -44,7 +45,7 @@ Future<File?> showMainImageSelector(BuildContext context) async {
         ),
         ListTile(
           leading: const Icon(Icons.camera_alt),
-          title: const Text("Camera"),
+          title: const Text(Constants.camera),
           onTap: () {
             pickImage(source: ImageSource.camera).then((result) {
               pickedImage = File(result.path);
