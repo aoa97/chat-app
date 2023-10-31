@@ -1,12 +1,13 @@
 import 'package:chat/controllers/chat_room_controller.dart';
-import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/models/chat_message_model.dart';
 import 'package:chat/views/containers/main_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 
 part "../widgets/chat_room_components.dart";
 
@@ -17,7 +18,7 @@ class ChatScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final messages = ref.watch(roomMessagesStreamProvider(roomId));
+    final chatHeaderStream = ref.watch(chatHeaderStreamProvider(roomId));
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -27,49 +28,69 @@ class ChatScreen extends ConsumerWidget {
           icon: Icon(Icons.arrow_back_ios, color: context.colors.primary),
           onPressed: () => Navigator.pop(context),
         ),
-        title: Row(
-          children: [
-            Container(
-              width: 35.h,
-              height: 35.h,
-              decoration: const BoxDecoration(shape: BoxShape.circle),
-              clipBehavior: Clip.antiAlias,
-              child: Image.network("https://picsum.photos/45"),
-            ),
-            10.horizontalSpace,
-            Text(
-              "Ahmed Usama",
-              style: TextStyle(fontSize: 18.sp, color: context.colors.primary),
-            ),
-          ],
+        title: chatHeaderStream.when(
+          loading: () => const SizedBox.shrink(),
+          error: (error, stackTrace) => const SizedBox.shrink(),
+          data: (data) => Row(
+            children: [
+              Container(
+                width: 35.h,
+                height: 35.h,
+                decoration: const BoxDecoration(shape: BoxShape.circle),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(data.avatar),
+              ),
+              10.horizontalSpace,
+              Text(
+                data.name,
+                style: TextStyle(fontSize: 18.sp, color: context.colors.primary),
+              ),
+            ],
+          ),
         ),
       ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
-              child: messages.when(
-                error: (error, stackTrace) => Center(child: Text(error.toString())),
-                loading: () => const Center(child: CircularProgressIndicator()),
-                data: (data) {
-                  if (data.isEmpty) {
-                    return const Center(child: Text(Constants.emptyMessages));
+              child: StreamBuilder(
+                stream: ref.watch(chatRoomControllerProvider(roomId).notifier).roomMessagesStream,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    const Center(child: CircularProgressIndicator());
                   }
 
-                  return GroupedListView(
-                    elements: data,
-                    padding: const EdgeInsets.all(12).h,
-                    groupBy: (message) => message.createdAt.day,
-                    itemBuilder: (context, message) => _ChatRoomBubble(message: message),
-                    groupHeaderBuilder: (message) => _ChatRoomSeparator(
-                      label: message.createdAt.toString().split(" ")[0],
-                    ),
-                    separator: 7.verticalSpace,
-                  );
+                  if (snapshot.connectionState == ConnectionState.active && snapshot.hasData) {
+                    final messages = snapshot.data ?? [];
+
+                    return GroupedListView<ChatMessageModel, int?>(
+                      elements: messages,
+                      reverse: true,
+                      sort: false,
+                      padding: const EdgeInsets.all(12).h,
+                      groupBy: (message) => message.createdAt?.day,
+                      itemBuilder: (context, message) => ChatRoomBubble(
+                        key: ValueKey(message.id),
+                        message: message,
+                      ),
+                      groupHeaderBuilder: (message) {
+                        if (message.createdAt == null) {
+                          return const SizedBox();
+                        }
+
+                        return _ChatRoomSeparator(
+                          label: message.createdAt.toString().split(" ")[0],
+                        );
+                      },
+                      separator: 7.verticalSpace,
+                    );
+                  }
+
+                  return const SizedBox();
                 },
               ),
             ),
-            const _ChatRoomInput(),
+            _ChatRoomInput(roomId: roomId),
           ],
         ),
       ),

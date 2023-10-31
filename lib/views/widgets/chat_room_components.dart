@@ -1,9 +1,9 @@
 part of "../screens/chat_room_screen.dart";
 
-class _ChatRoomBubble extends StatelessWidget {
+class ChatRoomBubble extends StatelessWidget {
   final ChatMessageModel message;
 
-  const _ChatRoomBubble({required this.message});
+  const ChatRoomBubble({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +37,14 @@ class _ChatRoomBubble extends StatelessWidget {
                     bottomRight: const Radius.circular(8),
                   ),
                 ),
-                child: Text(message.text, style: TextStyle(fontSize: 12.sp)),
+                child: Text(message.text!, style: TextStyle(fontSize: 12.sp)),
               ),
               5.verticalSpace,
-              const Text(
-                "1:02 PM",
-                style: TextStyle(fontSize: 10),
-              ),
+              if (message.createdAt != null)
+                Text(
+                  DateFormat('h:mm a').format(message.createdAt!),
+                  style: const TextStyle(fontSize: 10),
+                ),
             ],
           ),
         ],
@@ -52,21 +53,39 @@ class _ChatRoomBubble extends StatelessWidget {
   }
 }
 
-class _ChatRoomInput extends StatelessWidget {
-  const _ChatRoomInput();
+class _ChatRoomInput extends HookConsumerWidget {
+  final String roomId;
+
+  const _ChatRoomInput({required this.roomId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final text = useTextEditingController(text: "");
+    final enableSubmit = useState<bool>(false);
+    final isLoading = ref.watch(chatRoomControllerProvider(roomId));
+
+    sendMessage() async {
+      await ref.read(chatRoomControllerProvider(roomId).notifier).sendMessage(text: text.text);
+      text.clear();
+    }
+
     return Container(
       margin: const EdgeInsets.all(15).h,
       child: MainCard(
         thin: true,
         child: TextField(
+          controller: text,
+          onChanged: (value) => enableSubmit.value = value.isNotEmpty,
           decoration: InputDecoration(
             hintText: "Enter your message...",
             prefixIcon: IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {},
+              icon: isLoading
+                  ? const SizedBox.square(
+                      dimension: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.send),
+              onPressed: !enableSubmit.value ? null : sendMessage,
             ),
             suffixIcon: IconButton(
               icon: const Icon(Icons.attach_file),
