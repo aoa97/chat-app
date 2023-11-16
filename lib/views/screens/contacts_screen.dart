@@ -1,7 +1,7 @@
 import 'package:chat/controllers/contacts_controller.dart';
 import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
-import 'package:chat/views/containers/main_card.dart';
+import 'package:chat/views/layouts/main_card.dart';
 import 'package:chat/views/widgets/contact_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,7 +12,7 @@ class ContactsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final contacts = ref.watch(contactsStreamProvider);
+    final contactsStream = ref.watch(contactsStreamProvider);
 
     return Column(
       children: [
@@ -26,8 +26,8 @@ class ContactsScreen extends ConsumerWidget {
         ),
         30.verticalSpace,
         Expanded(
-          child: contacts.when(
-            error: (error, stackTrace) => Center(child: Text(error.toString())),
+          child: contactsStream.when(
+            error: (error, _) => Center(child: Text(error.toString())),
             loading: () => const Center(child: CircularProgressIndicator()),
             data: (data) {
               if (data.isEmpty) {

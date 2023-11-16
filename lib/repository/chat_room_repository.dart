@@ -44,7 +44,7 @@ class ChatRoomRepository {
   }
 
   Stream<List<ChatMessageModel>> getRoomMessages() {
-    final snapshots = _roomRef.collection("messages").orderBy('createdAt', descending: true).snapshots();
+    final snapshots = _roomRef.collection("chats").orderBy('createdAt', descending: true).snapshots();
 
     return snapshots.map(
       (snap) => [
@@ -62,7 +62,13 @@ class ChatRoomRepository {
     final messageBody = message.copyWith(senderId: myId);
 
     try {
-      await _roomRef.collection("messages").add(messageBody.toMap());
+      Future.wait([
+        _roomRef.collection("chats").add(messageBody.toMap()),
+        // Gotta be moved to cloud functions
+        _usersRef.doc(myId).collection("chats").doc(_roomId).set({}),
+        _usersRef.doc(extractOtherId(_roomId, myId)).collection("chats").doc(_roomId).set({}),
+      ]);
+
       return right(null);
     } on FirebaseException catch (e) {
       return left(Failure(e.message ?? ""));

@@ -18,6 +18,7 @@ abstract class Constants {
   static const logOut = "Log Out";
   static const searchByNameHint = "Search by name";
   static const emptyContacts = "No contacts";
+  static const emptyRecent = "No chats yet";
   static const emptyMessages = "Send your first messages";
   static const savedMessages = "Saved Messages";
   static const alreadyAccountHint = "Already have an account? Login";

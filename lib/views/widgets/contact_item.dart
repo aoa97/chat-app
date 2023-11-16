@@ -1,6 +1,7 @@
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/helpers.dart';
-import 'package:chat/views/containers/main_card.dart';
+import 'package:chat/views/layouts/main_card.dart';
+import 'package:chat/views/widgets/main_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,14 +30,7 @@ class ContactItem extends ConsumerWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5).h,
           child: ListTile(
-            leading: CircleAvatar(
-              radius: 25.h,
-              backgroundColor: context.colors.primary,
-              child: CircleAvatar(
-                radius: 24.h,
-                backgroundImage: NetworkImage(image),
-              ),
-            ),
+            leading: MainAvatar(imageUrl: image, dimension: 45.h),
             title: Text(
               name,
               style: TextStyle(

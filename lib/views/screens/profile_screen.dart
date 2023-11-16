@@ -1,10 +1,10 @@
 import 'package:chat/controllers/auth_controller.dart';
 import 'package:chat/core/utils/constants.dart';
 import 'package:chat/core/utils/extensions.dart';
-import 'package:chat/core/utils/flutter_assets.dart';
-import 'package:chat/views/containers/main_card.dart';
+import 'package:chat/views/layouts/main_card.dart';
 import 'package:chat/views/screens/profile_edit_screen.dart';
 import 'package:chat/views/widgets/main_button.dart';
+import 'package:chat/views/widgets/main_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,16 +29,10 @@ class ProfileScreen extends ConsumerWidget {
                     data: (user) => Column(
                       children: [
                         Center(
-                          child: Container(
-                            width: 100.h,
-                            height: 100.h,
-                            decoration: const BoxDecoration(shape: BoxShape.circle),
-                            clipBehavior: Clip.antiAlias,
-                            child: Image.network(
-                              user.avatar ?? "",
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) => Assets.userAvatarPlacehoder,
-                            ),
+                          child: MainAvatar(
+                            imageUrl: user.avatar ?? "",
+                            dimension: 100.h,
+                            strokeWidth: 2,
                           ),
                         ),
                         7.5.verticalSpace,
@@ -80,13 +74,13 @@ class ProfileScreen extends ConsumerWidget {
             ),
           ),
           const Spacer(),
-          MainButton(
-            expanded: true,
-            type: MainButtonType.outlined,
-            onPressed: () {},
-            icon: Icon(Icons.bookmark, color: context.colors.primary),
-            child: Text(Constants.savedMessages, style: TextStyle(color: context.colors.primary)),
-          ),
+          // MainButton(
+          //   expanded: true,
+          //   type: MainButtonType.outlined,
+          //   onPressed: () {},
+          //   icon: Icon(Icons.bookmark, color: context.colors.primary),
+          //   child: Text(Constants.savedMessages, style: TextStyle(color: context.colors.primary)),
+          // ),
           MainButton(
             expanded: true,
             type: MainButtonType.outlined,

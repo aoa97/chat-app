@@ -7,7 +7,7 @@ import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/flutter_assets.dart';
 import 'package:chat/core/utils/flutter_utils.dart';
 import 'package:chat/core/utils/validators.dart';
-import 'package:chat/views/containers/main_scaffold.dart';
+import 'package:chat/views/layouts/main_scaffold.dart';
 import 'package:chat/views/widgets/main_button.dart';
 import 'package:chat/views/widgets/main_text_field.dart';
 import 'package:flutter/material.dart';

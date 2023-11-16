@@ -1,5 +1,5 @@
 import 'package:chat/core/utils/extensions.dart';
-import 'package:chat/views/containers/main_card.dart';
+import 'package:chat/views/layouts/main_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

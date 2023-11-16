@@ -25,13 +25,16 @@ final getUserDataProvider = StreamProvider.family((ref, String uid) {
 class AuthController extends StateNotifier<bool> {
   final Ref _ref;
   final AuthRepository _authRepository;
+  String? uid;
 
   AuthController({
     required AuthRepository authRepository,
     required Ref ref,
   })  : _authRepository = authRepository,
         _ref = ref,
-        super(false); //* loading
+        super(false) {
+    authStateChange.first.then((user) => uid = user?.uid);
+  }
 
   authWithEmail({
     required BuildContext context,
@@ -48,6 +51,7 @@ class AuthController extends StateNotifier<bool> {
       (failure) => showSnackBar(context, failure.message),
       (userModel) {
         _ref.read(userProvider.notifier).update((_) => userModel);
+        uid = userModel.uid;
       },
     );
   }

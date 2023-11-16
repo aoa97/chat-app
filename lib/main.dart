@@ -8,6 +8,7 @@ import 'package:chat/providers/theme_provider.dart';
 import 'package:chat/views/layouts/main_layout.dart';
 import 'package:chat/views/screens/auth_screen.dart';
 import 'package:chat/views/screens/chat_room_screen.dart';
+import 'package:chat/views/screens/profile_public_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,14 @@ class MainApp extends HookConsumerWidget {
                 ),
             onGenerateRoute: (settings) {
               return switch (settings.name) {
+                "/profile" => () {
+                    final userId = settings.arguments as String;
+                    return MaterialPageRoute(builder: (_) => PublicProfileScreen(uid: userId));
+                  }(),
+                "/room" => () {
+                    final roomId = settings.arguments as String;
+                    return MaterialPageRoute(builder: (_) => ChatScreen(roomId: roomId));
+                  }(),
                 "/user-room" => () {
                     final otherId = settings.arguments as String;
                     final myId = ref.read(userProvider)!.uid;
