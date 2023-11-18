@@ -1,3 +1,4 @@
+import 'package:chat/core/utils/helpers.dart';
 import 'package:chat/modules/chat-room/controller/chat_room_controller.dart';
 import 'package:chat/modules/chat-room/models/chat_message_model.dart';
 import 'package:chat/modules/chat-room/view/widgets/chat_room_bubble.dart';
@@ -41,7 +42,7 @@ class ChatRoomMessages extends ConsumerWidget {
               }
 
               return ChatRoomSeparator(
-                label: message.createdAt.toString().split(" ")[0],
+                label: renderDay(message.createdAt!),
               );
             },
             separator: 7.verticalSpace,

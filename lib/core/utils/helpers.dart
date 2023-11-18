@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 bool checkPattern({required String pattern, required String value}) {
   final regularCheck = RegExp(pattern);
   return regularCheck.hasMatch(value);
@@ -27,4 +29,27 @@ String? extractOtherId(String roomId, String myId) {
     if (match.group(2) != null) return match.group(2);
   }
   return null;
+}
+
+String renderDay(DateTime dateTime) {
+  var date = DateTime(dateTime.year, dateTime.month, dateTime.day);
+  var now = DateTime.now();
+  var today = DateTime(now.year, now.month, now.day);
+  var yesterday = DateTime(now.year, now.month, now.day - 1);
+
+  if (date == today) {
+    return "Today";
+  }
+
+  if (date == yesterday) {
+    return "Yesteday";
+  }
+
+  return DateFormat('MMM d, yyyy').format(dateTime);
+}
+
+String renderTime(DateTime dateTime) {
+  final day = renderDay(dateTime);
+  final time = DateFormat('h:mm a').format(dateTime);
+  return "$day $time";
 }

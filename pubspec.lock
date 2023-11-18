@@ -480,6 +480,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  palestine_console:
+    dependency: "direct dev"
+    description:
+      name: palestine_console
+      sha256: "3159d272077be170f6a99d082d07ed1b603283ba869370779ad158bc3728f4d9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.10"
   path:
     dependency: "direct main"
     description:
@@ -733,6 +741,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  timeago:
+    dependency: "direct main"
+    description:
+      name: timeago
+      sha256: c44b80cbc6b44627c00d76960f2af571f6f50e5dbedef4d9215d455e4335165b
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.6.0"
   typed_data:
     dependency: transitive
     description:

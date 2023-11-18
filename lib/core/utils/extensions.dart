@@ -9,3 +9,12 @@ extension BuildContextExtension on BuildContext {
   void pop() => Navigator.of(this).pop();
   bool get canPop => Navigator.of(this).canPop();
 }
+
+extension NullableExtensions<T> on T? {
+  R? elseNull<R>(R Function(T) op) {
+    if (this != null) {
+      return op(this as T);
+    }
+    return null;
+  }
+}

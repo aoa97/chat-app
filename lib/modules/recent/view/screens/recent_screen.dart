@@ -6,7 +6,7 @@ import 'package:chat/modules/recent/view/widgets/recent_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class RecentScreen extends ConsumerWidget {
   const RecentScreen({super.key});
@@ -20,7 +20,7 @@ class RecentScreen extends ConsumerWidget {
         MainCard(
           child: TextField(
             decoration: InputDecoration(
-              hintText: "Search by name",
+              hintText: Constants.searchByNameHint,
               prefixIcon: IconButton(icon: const Icon(Icons.search), onPressed: () {}),
             ),
           ),
@@ -44,7 +44,7 @@ class RecentScreen extends ConsumerWidget {
                     image: recent.avatar,
                     user: recent.name,
                     message: recent.text,
-                    createdAt: recent.createdAt != null ? DateFormat('h:mm a').format(recent.createdAt!) : null,
+                    createdAt: recent.createdAt.elseNull((val) => timeago.format(val)),
                     onTap: () => context.pushNamed("/room", args: recent.roomId),
                   );
                 },

@@ -20,7 +20,7 @@ class MainLayout extends HookConsumerWidget {
     final screens = [
       (icon: const Icon(Icons.schedule), label: Constants.recent, screen: const RecentScreen()),
       (icon: const Icon(Icons.people), label: Constants.contacts, screen: const ContactsScreen()),
-      (icon: const Icon(Icons.person), label: Constants.profile, screen: const ProfileScreen()),
+      (icon: const Icon(Icons.person), label: Constants.profile, screen: const MyProfileScreen()),
     ];
 
     return Scaffold(

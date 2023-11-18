@@ -27,11 +27,13 @@ dependencies:
   rxdart: ^0.27.7
   separated_column: ^2.0.0
   shared_preferences: ^2.2.0
+  timeago: ^3.6.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  palestine_console: ^0.0.10
 
 flutter:
   uses-material-design: true

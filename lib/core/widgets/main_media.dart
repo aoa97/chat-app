@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat/core/utils/extensions.dart';
 import 'package:chat/core/utils/flutter_assets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MainAvatar extends StatelessWidget {
   final String imageUrl;
@@ -21,12 +20,8 @@ class MainAvatar extends StatelessWidget {
     return Container(
       width: dimension,
       height: dimension,
-      padding: EdgeInsets.all(strokeWidth ?? 1).r,
       clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: context.colors.primary,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: context.colors.primary, shape: BoxShape.circle),
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
